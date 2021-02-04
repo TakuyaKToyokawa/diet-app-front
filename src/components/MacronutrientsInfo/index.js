@@ -69,16 +69,6 @@ const MacronutrientsInfo = ({}) => {
           </Text>
         </TextCont>
       </InnerCont>
-
-      {/* <TextCont>
-        <Circle /> <Text>Carbs</Text>
-      </TextCont>
-      <TextCont>
-        <Circle color="#FFDF3B" /> <Text>Fat</Text>
-      </TextCont>
-      <TextCont>
-        <Circle color="#7910FF" /> <Text>Protein</Text>
-      </TextCont> */}
     </Container>
   );
 };
