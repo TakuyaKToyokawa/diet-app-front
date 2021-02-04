@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const MacronutrientsInfo = styled.div``;
+const Container = styled.div``;
 
 const MacronutrientsInfo = ({}) => {
   return <></>;
