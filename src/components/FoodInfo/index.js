@@ -88,7 +88,7 @@ text-indent:10px;
 
 const BottomContainer = styled.div`
 display:flex;
-border-bottom-radius:15px;
+border-radius:15px;
 flex-direction:column;
 `;
 

@@ -1,15 +1,26 @@
-import './App.scss';
-import Main from './pages/index';
-import FoodSearchPage from './pages/FoodSearchPage';
-import FoodSearchInfo from './pages/FoodSearchInfo';
-import SearchBar from './components/SearchBar';
-import MacronutrientsInfo from './components/MacronutrientsInfo';
+import "./App.scss";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Main from "./pages/index";
+import Food from "./pages/food";
+import Footer from "./components/Footer";
+import Homepage from './pages/homepage';
+import Dairy from "./pages/Dairy";
 
 function App() {
   return (
-    <div className="App">
-      <FoodSearchPage />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/food">
+             <Dairy></Dairy>
+          </Route>
+          <Route path="/">
+            <Main></Main>
+          </Route>
+        </Switch>
+        <Footer></Footer>
+      </div>
+    </Router>
   );
 }
 

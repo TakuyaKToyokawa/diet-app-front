@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 const Container = styled.div`
   min-width: ${(props) => (props.width ? props.width : "415px")};
-  max-width: ${(props) => (props.width ? props.width : "20%")};
+  max-width: ${(props) => (props.width ? props.width : "100%")};
   min-height: ${(props) => (props.height ? props.height : "180px")};
   max-height: ${(props) => (props.height ? props.height : "300px")};
   display: flex;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const Img = styled.img``;
@@ -17,7 +19,6 @@ const Img = styled.img``;
 const ContLeft = styled.div`
   display: flex;
   flex: 3;
-
   flex-direction: column;
   margin-left: 20px;
   margin-top: 10px;
