@@ -4,14 +4,14 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  cursor:pointer;
+  cursor: pointer;
   border: 2px solid #cccccc;
   box-sizing: border-box;
   border-radius: 10px;
   padding: 10px 20px;
-  transition: .1s ease-out;
-  :hover{
-    background-color: #EEEEEE;
+  transition: 0.1s ease-out;
+  :hover {
+    background-color: #eeeeee;
   }
 `;
 
