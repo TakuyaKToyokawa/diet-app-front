@@ -13,9 +13,12 @@ import FoodList from "../components/FoodList";
 const Food = () => {
   return (
     <div className="main">
-      <Confirmation> </Confirmation>
-      <List></List>
-      <Header></Header>
+      <div className="flex">
+        <Confirmation> </Confirmation>
+        <List></List>
+        <Header></Header>
+      </div>
+
       <Dropdown></Dropdown>
       <Footer></Footer>
       <HorizontalProgress></HorizontalProgress>
