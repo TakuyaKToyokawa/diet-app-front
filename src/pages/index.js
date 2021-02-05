@@ -16,13 +16,6 @@ const Main = () => {
       <Confirmation> </Confirmation>
       <List></List>
       <Header></Header>
-      <Dropdown></Dropdown>
-
-      <HorizontalProgress></HorizontalProgress>
-      <VerticalProgress></VerticalProgress>
-      <FoodList></FoodList>
-      <MacronutrientsInfo></MacronutrientsInfo>
-
     </div>
   );
 };

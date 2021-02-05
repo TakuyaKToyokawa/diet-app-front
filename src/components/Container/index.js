@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Cont = styled.div`
   min-width: ${(props) => (props.width ? props.width : "374px")};
   max-width: ${(props) => (props.width ? props.width : "20%")};
-  min-height: ${(props) => (props.height ? props.height : "159px")};
+  min-height: ${(props) => (props.height  ? props.height : "159px")};
   max-height: ${(props) => (props.height ? props.height : "300px")};
   display: flex;
   border-radius: 10px;
@@ -13,6 +13,7 @@ const Cont = styled.div`
   justify-content:center;
   align-items:center;
 `;
+
 
 const Container = ({ width, height, direction, children }) => {
   return (
