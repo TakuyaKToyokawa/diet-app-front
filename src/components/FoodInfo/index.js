@@ -112,7 +112,7 @@ const MacroNum = styled.div`
 font-size:20px;
 color:#000000;
 display:flex;
-justify-content:flex-end
+justify-content:flex-end;
 flex:1;
 text-align:right;
 margin-right:15px;
