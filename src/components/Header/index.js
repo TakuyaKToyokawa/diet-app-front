@@ -32,7 +32,6 @@ const Header = ({ size, title, title2 }) => {
       </Main>
     </>
   );
-};
 
 Header.defaultProps = {
   title: "",

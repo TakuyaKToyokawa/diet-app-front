@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Container = styled.div`
-  height: 150px;
   display: flex;
+  height: 150px;
   justify-content: space-around;
   align-items: center;
 `;
@@ -26,7 +27,7 @@ const Icons = styled.div`
   width: 75px;
   height: 32px;
   background-color: #cccccc;
-  transition: .1s ease-out;
+  transition: 0.1s ease-out;
 `;
 
 const ProgressIcon = styled(Icons)`
@@ -43,7 +44,7 @@ const IconCont = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  cursor:pointer;
+  cursor: pointer;
   :hover ${Text} {
     color: #5b62ff;
   }
@@ -57,13 +58,17 @@ const Footer = ({}) => {
     <>
       <Container>
         <IconCont>
-          <ProgressIcon />
-          <Text>Progress</Text>
+          <Link to="/food">
+            <ProgressIcon />
+            <Text>Progress</Text>
+          </Link>
         </IconCont>
         <Divider />
         <IconCont>
-          <DiaryIcon src="icons/diary.svg" />
-          <Text>Diary</Text>
+          <Link to="/">
+            <DiaryIcon src="icons/diary.svg" />
+            <Text>Diary</Text>
+          </Link>
         </IconCont>
       </Container>
     </>
