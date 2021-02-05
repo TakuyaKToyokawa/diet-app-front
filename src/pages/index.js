@@ -17,7 +17,7 @@ const Main = () => {
       <List></List>
       <Header></Header>
       <Dropdown></Dropdown>
-      <Footer></Footer>
+
       <HorizontalProgress></HorizontalProgress>
       <VerticalProgress></VerticalProgress>
       <FoodList></FoodList>
