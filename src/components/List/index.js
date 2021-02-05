@@ -27,17 +27,20 @@ justify-content:space-between;
 align-items:center;
 `;
 
-const List = ({}) => {
+const List = ({text, number}) => {
   return <>
   <Main> 
     <Wrapped>
-    <Fooditem> Yogurt </Fooditem> 
-    <Calorienumber> 350 </Calorienumber>
+    <Fooditem>{text}</Fooditem> 
+    <Calorienumber>{number}</Calorienumber>
     </Wrapped>
   </Main>
   </>;
 };
 
-List.defaultProps = {};
+List.defaultProps = {
+  text:"Yogurt",
+  number:"350"
+};
 
 export default List;

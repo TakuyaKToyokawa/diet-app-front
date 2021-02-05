@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import styled from "styled-components";
+
 
 const Container = styled.div`
 position: absolute;
 width:383px;
 height:503px;
-display:flex;
+// display:${props=>props.closed ? "inline-flex" : "none"}
 background: linear-gradient(to bottom, #ffffff 51%, #fafafa 50%);
 border-radius:15px;
 filter: drop-shadow(0 0 0.75rem black);
@@ -18,6 +19,7 @@ const CloseIcon = styled.img`
   left: 15px;
   width: 15px;
   height: 15px;
+  cursor:pointer;
 `;
 
 const InfoContainer = styled.div`
@@ -128,8 +130,13 @@ flex:2;
 `;
 
 const MacronutrientsInfo = ({ Name, CaloriesNumber, MacroNumb, width, bgcolor }) => {
+  const [closed, setClosed] = useState(false);
+
+
   return <Container>
-      <CloseIcon src="./close.png" />
+      <CloseIcon src="./close.png" onClick={()=>{
+        setClosed(!closed);
+      }}/>
       <InfoContainer>
         <FoodName>{Name}</FoodName>
         <Number>{CaloriesNumber}</Number>
