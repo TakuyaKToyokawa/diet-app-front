@@ -1,8 +1,11 @@
+
 import "./App.scss";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Main from "./pages/index";
 import Food from "./pages/food";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Homepage from './pages/homepage';
+
 
 function App() {
   return (
