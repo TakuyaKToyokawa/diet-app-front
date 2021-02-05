@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Cont = styled.div`
   min-width: ${(props) => (props.width ? props.width : "414px")};
   max-width: ${(props) => (props.width ? props.width : "20%")};
-  min-height: ${(props) => (props.height ? props.height : "159px")};
+  min-height: ${(props) => (props.height  ? props.height : "159px")};
   max-height: ${(props) => (props.height ? props.height : "300px")};
   display: flex;
   border-radius: 10px;
@@ -12,11 +12,11 @@ const Cont = styled.div`
   flex-direction: ${(props) => (props.direction ? props.direction : "column")};
 `;
 
-const Container = ({ width, height, direction }) => {
+const Container = ({ width, height, direction, children}) => {
   return (
     <>
       <Cont width={width} height={height} direction={direction}>
-        <p>Hello</p>
+        {children}
       </Cont>
     </>
   );
