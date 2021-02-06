@@ -2,24 +2,40 @@ import React from "react";
 import styled from "styled-components";
 
 const Cont = styled.div`
-  min-width: ${(props) => (props.width ? props.width : "374px")};
-  max-width: ${(props) => (props.width ? props.width : "20%")};
-  min-height: ${(props) => (props.height  ? props.height : "159px")};
-  max-height: ${(props) => (props.height ? props.height : "300px")};
-  display: flex;
+  background: white;
+  width: 100%;
+  padding: 20px 0px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
-  justify-content:center;
-  align-items:center;
 `;
 
+//Added Container for child to make sure spacing is correct and not go over screen size
 
-const Container = ({ width, height, direction, children }) => {
+const ChildCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+   //Props for: width, height, and flex-direction
+  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
+  align-items: ${(props) => (props.align ? props.align : null)};
+  justify-content: ${(props) => (props.justify ? props.justify : null)};
+  min-width: ${(props) => (props.width ? props.width : "auto")};
+  max-width: ${(props) => (props.width ? props.width : "auto")};
+  min-height: ${(props) => (props.height ? props.height : "auto")};
+  max-height: ${(props) => (props.height ? props.height : "auto")};
+  &:first-child {
+    margin: 0px 20px;
+  }
+`;
+const Container = ({ width, height, direction, children, align, justify }) => {
   return (
     <>
-      <Cont width={width} height={height} direction={direction}>
-        {children}
+      <Cont>
+        <ChildCont width={width} height={height} direction={direction} align={align} justify={justify}>
+          {children}
+        </ChildCont>
       </Cont>
     </>
   );

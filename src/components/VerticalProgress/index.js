@@ -5,15 +5,17 @@ import styled from "styled-components";
 const ProgressBar = styled.div`
   position: relative;
   height: 200px;
-  width: 10px;
+  width: 15px;
   background-color: #cccccc;
   border-radius: 20px;
+  transform:rotate(180deg);
+  margin-bottom: 20px;
   &::after {
     content: "";
     position: absolute;
     background-color: #db1e1e;
     height: ${(props) => (props.height ? props.height : "50%")};
-    width: 10px;
+    width: 15px;
     border-radius: 20px;
   }
 `;

@@ -1,20 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
-const Container = styled.div`
-  min-width: ${(props) => (props.width ? props.width : "371px")};
-  max-width: ${(props) => (props.width ? props.width : "20%")};
-  min-height: ${(props) => (props.height ? props.height : "108px")};
-  max-height: ${(props) => (props.height ? props.height : "300px")};
-  display: flex;
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+import Container from "components/Container";
 
 const InnerCont = styled.div`
   display: flex;
-  flex-directiob: row;
-  // background-color: red;
+  flex-direction: row;
   margin: 30px;
 `;
 
@@ -41,7 +31,7 @@ const Text = styled.p`
 
 const MacronutrientsInfo = ({}) => {
   return (
-    <Container>
+    <Container direction="row">
       <InnerCont>
         <Circle />
         <TextCont>

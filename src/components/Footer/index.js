@@ -4,14 +4,17 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
-  height: 150px;
   justify-content: space-around;
   align-items: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 120px;
+  background-color: white;
+  filter: drop-shadow(0px -2px 15px rgba(0, 0, 0, 0.08));
 `;
 
 const Divider = styled.div`
-  position: relative;
-  top: -5px;
   height: 20%;
   width: 8px;
   background-color: #c4c4c4;
@@ -41,10 +44,13 @@ const DiaryIcon = styled(Icons)`
 `;
 
 const IconCont = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   cursor: pointer;
+  & a {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+  }
   :hover ${Text} {
     color: #5b62ff;
   }
@@ -58,14 +64,14 @@ const Footer = ({}) => {
     <>
       <Container>
         <IconCont>
-          <Link to="/food">
+          <Link to="/">
             <ProgressIcon />
             <Text>Progress</Text>
           </Link>
         </IconCont>
         <Divider />
         <IconCont>
-          <Link to="/">
+          <Link to="/Diary">
             <DiaryIcon src="icons/diary.svg" />
             <Text>Diary</Text>
           </Link>
