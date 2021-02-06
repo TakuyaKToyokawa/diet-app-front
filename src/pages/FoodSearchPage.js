@@ -5,11 +5,19 @@ import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar";
 import FoodInfo from "../components/FoodInfo";
 import List from "../components/List";
+import { foods } from "../database/sampleFoods";
+import { meals } from "database/sampleMeals";
 
 const FoodSearchPage = () => {
-  
   const [expanded, setExpanded] = useState("hidden");
+  const [categories, setCategories] = useState([]);
+  const [carbs, setCarbs] = useState();
+  const [calories, setCalories] = useState();
+  const [protein, setProtein] = useState();
+  const [fat, setFat] = useState();
+  const [name, setName] = useState();
 
+  //Displays onclick for FoodInfo Component
   const FoodInfoVisibility = () => {
     if (expanded == "hidden") {
       setExpanded("visible");
@@ -18,28 +26,34 @@ const FoodSearchPage = () => {
     }
   };
 
-
-// const [backend, setBackend] = useState([])
-// const [foodname, setFoodname] = useState([])
-// const [calories, setCalories] = useState([])
-
-
-// const addFood = async ()=> {
-//   console.log("Pulled from Database");
-//   var resp = await axios.post("api link?",{
-//   });
-//   console.log(resp.data);
-//   setBackend([...resp.data]);
-//   setFoodname([...resp.data]);
-//   setCalories([...resp.data]);
-// }
+  //Get Categories for filter purposes during mapping
+  function GetCategories() {
+    let result = [];
+    for (let i = 0; i < foods.length; i++) {
+      let category = foods[i].category;
+      if (!result.includes(category)) {
+        result.push(category);
+      }
+    }
+    setCategories(result);
+  }
 
 
+  useEffect(() => {
+    GetCategories();
+  }, []);
 
-  
   return (
     <div className="main">
-      <FoodInfo visibility={expanded} onClose={FoodInfoVisibility}></FoodInfo>
+      <FoodInfo
+        Name={name}
+        CaloriesNumber={calories}
+        protein={protein}
+        carbs={carbs}
+        fat={fat}
+        visibility={expanded}
+        onClose={FoodInfoVisibility}
+      ></FoodInfo>
       <Header>
         <div class="headerCenter">
           <h2 className="title">Breakfast</h2>
@@ -64,18 +78,35 @@ const FoodSearchPage = () => {
       </div>
       <div className="dropdown">
         <div className="ddmenu">
-          <Dropdown category="Dairy" />
           <div className="food">
-            <List onClick={FoodInfoVisibility} text="Cheese" number="120" />
-            <List onClick={FoodInfoVisibility} text="Cheese" number="120" />
-            <List onClick={FoodInfoVisibility} text="Milk" number="193" />
+            {/* mapping for all the categories and lists */}
+            {categories.map((o) => {
+              let currentCategory = o;
+              return (
+                <>
+                  <Dropdown category={o} />
+                  {foods.map((o) => {
+                    if (o.category === currentCategory) {
+                      return (
+                        <List
+                          text={o.name}
+                          number={o.calories}
+                          onClick={() => {
+                            setExpanded("visible");
+                            setCarbs(o.carbs);
+                            setProtein(o.protein);
+                            setCalories(o.calories);
+                            setFat(o.fat);
+                            setName(o.name);
+                          }}
+                        />
+                      );
+                    }
+                  })}
+                </>
+              );
+            })}
           </div>
-        </div>
-        <div className="ddmenu">
-          <Dropdown category="Meat" />
-        </div>
-        <div className="ddmenu">
-          <Dropdown category="Vegetables" />
         </div>
       </div>
     </div>
