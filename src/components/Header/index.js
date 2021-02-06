@@ -26,13 +26,9 @@ const Title2 = styled.p`
 `;
 
 const Header = ({children}) => {
-  return (
-    <>
-      <Main>
+  return <Main>
         {children}
       </Main>
-    </>
-  );
 };
 
 Header.defaultProps = {

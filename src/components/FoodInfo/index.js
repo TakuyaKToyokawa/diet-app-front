@@ -144,7 +144,7 @@ const Bar = styled.div`
 const MacronutrientsInfo = ({
   Name,
   CaloriesNumber,
-  MacroNumb,
+  protein, fat, carbs,
   onClose,
   visibility,
 }) => {
@@ -178,19 +178,19 @@ const MacronutrientsInfo = ({
         <BottomContainer>
           <BarContainer>
             <MacroInfo>Carbs</MacroInfo>
-            <MacroNum>{MacroNumb}</MacroNum>
+            <MacroNum>{carbs}</MacroNum>
             <Bar width="184px" bgcolor="#39d389" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Fat</MacroInfo>
-            <MacroNum>{MacroNumb}</MacroNum>
+            <MacroNum>{fat}</MacroNum>
             <Bar width="82px" bgcolor="#ffdf3b" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Protein</MacroInfo>
-            <MacroNum>{MacroNumb}</MacroNum>
+            <MacroNum>{protein}</MacroNum>
             <Bar width="48px" bgcolor="#7910ff" />
           </BarContainer>
         </BottomContainer>

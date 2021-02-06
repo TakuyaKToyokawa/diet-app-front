@@ -29,7 +29,7 @@ const Text = styled.p`
   margin: 0;
 `;
 
-const MacronutrientsInfo = ({}) => {
+const MacronutrientsInfo = ({carbs, fat, protein}) => {
   return (
     <Container direction="row">
       <InnerCont>
@@ -37,7 +37,7 @@ const MacronutrientsInfo = ({}) => {
         <TextCont>
           <Text>Carbs</Text>
           <Text>
-            <b>120g</b>
+            <b>{carbs}</b>
           </Text>
         </TextCont>
       </InnerCont>
@@ -46,7 +46,7 @@ const MacronutrientsInfo = ({}) => {
         <TextCont>
           <Text>Fat</Text>
           <Text>
-            <b>250g</b>
+            <b>{fat}</b>
           </Text>
         </TextCont>
       </InnerCont>
@@ -55,7 +55,7 @@ const MacronutrientsInfo = ({}) => {
         <TextCont>
           <Text>Protein</Text>
           <Text>
-            <b>1000g</b>
+            <b>{protein}</b>
           </Text>
         </TextCont>
       </InnerCont>

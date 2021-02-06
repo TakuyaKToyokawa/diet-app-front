@@ -5,6 +5,14 @@ import Footer from "./components/Footer";
 import Diary from "./pages/diary";
 import FoodSearchPage from "./pages/FoodSearchPage";
 
+  // test; create; food
+  // useEffect(()=>{
+  //   (async ()=>{
+  //       const foods = await getFoodList("");
+  //       console.log(foods[0]);
+  //     })()
+  // }, [])
+
 function App() {
   return (
     <Router>
