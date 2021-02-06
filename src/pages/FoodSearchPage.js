@@ -7,6 +7,7 @@ import FoodInfo from "../components/FoodInfo";
 import List from "../components/List";
 
 const FoodSearchPage = () => {
+  
   const [expanded, setExpanded] = useState("hidden");
 
   const FoodInfoVisibility = () => {
@@ -17,6 +18,25 @@ const FoodSearchPage = () => {
     }
   };
 
+
+// const [backend, setBackend] = useState([])
+// const [foodname, setFoodname] = useState([])
+// const [calories, setCalories] = useState([])
+
+
+// const addFood = async ()=> {
+//   console.log("Pulled from Database");
+//   var resp = await axios.post("api link?",{
+//   });
+//   console.log(resp.data);
+//   setBackend([...resp.data]);
+//   setFoodname([...resp.data]);
+//   setCalories([...resp.data]);
+// }
+
+
+
+  
   return (
     <div className="main">
       <FoodInfo visibility={expanded} onClose={FoodInfoVisibility}></FoodInfo>
