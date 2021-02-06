@@ -1,84 +1,67 @@
 import React from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const Container = styled.div`
-  min-width: ${(props) => (props.width ? props.width : "415px")};
-  max-width: ${(props) => (props.width ? props.width : "100%")};
-  min-height: ${(props) => (props.height ? props.height : "180px")};
-  max-height: ${(props) => (props.height ? props.height : "300px")};
-  display: flex;
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  flex-direction: row;
-  margin-left: 20px;
-  margin-right: 20px;
-`;
+//Imported Container Component to keep consistency between pages
+import Container from "components/Container";
 
-const Img = styled.img``;
-
-const ContLeft = styled.div`
-  display: flex;
-  flex: 3;
-  flex-direction: column;
-  margin-left: 20px;
-  margin-top: 10px;
-`;
-
-const ContRight = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-right: 30px;
-  margin-top: 10px;
-
-  text-align: right;
-`;
-
-const Text = styled.p``;
+//Seperated List from Container for future axios/REST api/mapping capabilites
+import List from "components/FoodList/list";
 
 const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
   background-color: #cd407d;
   color: white;
-  width: 145px;
-  min-height: 41px;
-  border-radius: 20px;
+  padding: 0px 20px;
+  min-width: 120px;
+  min-height: 50px;
+  border-radius: 100px;
   border: none;
+  transition: 0.1s ease-out;
+  &:hover {
+    background-color: #a22a5e;
+  }
 `;
 
-const FoodList = ({}) => {
+const ButtonCont = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  & a {
+    text-decoration: none;
+  }
+`;
+
+const FoodList = ({ total, link, children }) => {
   return (
     <>
       <Container>
-        <ContLeft>
-          <Text>
-            <img src="minus.png" /> 1 Skinny Vanilla Latte
-          </Text>
-          <Text>
-            <img src="minus.png" /> 1 Pancake
-          </Text>
-          <Button>
-            <img src="+.png" />
-            Add Food
-          </Button>
-          <Text></Text>
-        </ContLeft>
-        <ContRight>
-          <Text>
-            <b>120</b>
-          </Text>
-
-          <Text>
-            <b>227</b>
-          </Text>
-          <Text>
-            <b> Total 347</b>
-          </Text>
-        </ContRight>
+        {children}
+        <ButtonCont>
+          <Link to={link}>
+            <Button>
+              <img src="+.png"></img>Add Food
+            </Button>
+          </Link>
+          <p>
+            Total <b>{total}</b>
+          </p>
+        </ButtonCont>
       </Container>
     </>
   );
 };
 
-FoodList.defaultProps = {};
+FoodList.defaultProps = {
+  total: "200",
+  children: <List/>,
+  link: "/FoodSearchPage"
+};
 
 export default FoodList;

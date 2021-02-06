@@ -1,64 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
-@import "./pages/Dairy.scss";
+//Imports
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600;700&display=swap");
 
-
-*{
-  font-family: 'Inter', sans-serif;
+//General Usage
+html {
+  background-color: #f2f2f2;
 }
 
-h1, h2, h3, h4, h5, h6{
-  font-family: 'Poppins', sans-serif;
+//Fonts
+* {
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  color: #333333;
+}
+
+.center {
+  justify-content: center;
+  display: flex;
+}
+
+// For header
+.title {
+  color: white;
+  font-size: 2rem;
+}
+
+.headerCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.headerWelcome {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+
+//For the heading for each container thing
+.heading {
+  text-align: left;
+  font-size: 2rem;
+  width: 100%;
+  text-align: left;
+  margin-left: 50px;
+  color: #4d4d4d;
+  font-weight: 600;
 }
 
 .App {
-  width:100vw;
-  height:100vh;
-  
-}
-
-
-.main{
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  min-width: 400px;
   align-items: center;
   background-color: #f2f2f2;
-  width:414px;
 }
 
-.search{
-  margin-top:20px;
-  width:314px;
-  position: relative;
-  right:38px;
-}
-
+//Food Search page
 .dropdown {
-  width:395px;
-  margin-bottom:10px;
-  display:flex;
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
   justify-content: space-between;
   flex-direction: column;
+  .ddmenu {
+    & > :first-child {
+      margin: 15px 0px;
+    }
+  }
 }
 
-.ddmenu{
-  margin-top:15px;
+.food {
+  & * {
+    margin: 15px 0px;
+  }
 }
 
-.food{
-  margin-top: 15px;
-  margin-left:10px;
+.search {
+  display:flex;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.nav {
-  background-color: white;
-  width:414px;
-  height:86px;
+.filterIcon{
+  width: 35px;
+  cursor:pointer;
 }
-
-.info{
-  position: relative;
-  right:193px;
-  bottom:50px;
-}
-
 

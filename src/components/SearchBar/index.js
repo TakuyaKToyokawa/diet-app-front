@@ -15,7 +15,7 @@ const IconImg = styled.img`
 `;
 
 const Input = styled.input`
-  width:100%;
+  width:98%;
   min-height: 39px;
   background-color: #e5e5e5;
   border: none;
@@ -23,9 +23,10 @@ const Input = styled.input`
   font-size: 18px;
   color: #919191;
   display: flex;
-  padding-left: 10px;
+
   flex-direction: row;
   text-indent: 30px;
+  outline:none;
 `;
 
 const SearchBar = ({}) => {

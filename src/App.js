@@ -1,21 +1,24 @@
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Main from "./pages/index";
-import Food from "./pages/food";
+import Homepage from "./pages/index";
 import Footer from "./components/Footer";
-import Homepage from './pages/homepage';
-import Dairy from "./pages/Dairy";
+import Diary from "./pages/diary";
+import FoodSearchPage from "./pages/FoodSearchPage";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/food">
-             <Dairy></Dairy>
+
+          <Route path="/FoodSearchPage">
+            <FoodSearchPage></FoodSearchPage>
+          </Route>
+          <Route path="/diary">
+            <Diary></Diary>
           </Route>
           <Route path="/">
-            <Main></Main>
+            <Homepage></Homepage>
           </Route>
         </Switch>
         <Footer></Footer>
