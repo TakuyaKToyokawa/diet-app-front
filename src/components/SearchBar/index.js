@@ -29,15 +29,17 @@ const Input = styled.input`
   outline:none;
 `;
 
-const SearchBar = ({}) => {
+const SearchBar = ({onChange}) => {
   return (
     <Container>
-      <Input placeholder="Search for a food"/>
+      <Input placeholder="Search for a food" onChange={onChange}/>
       <IconImg src="./search.png" />
     </Container>
   );
 };
 
-SearchBar.defaultProps = {};
+SearchBar.defaultProps = {
+  onChange:() => {},
+};
 
 export default SearchBar;
