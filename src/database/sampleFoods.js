@@ -53,5 +53,22 @@ export const foods = [
     protein: 200,
     fat: 10
   },
-];
 
+  {
+    category: "Sweet",
+    name: "Pancake",
+    calories: 225,
+    carbs: 223,
+    protein: 200,
+    fat: 10
+  },
+
+  {
+    category: "Sweet",
+    name: "Pancake",
+    calories: 900,
+    carbs: 223,
+    protein: 200,
+    fat: 10
+  },
+];
