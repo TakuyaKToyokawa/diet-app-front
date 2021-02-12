@@ -46,6 +46,8 @@ const Diary = ({ user }) => {
     GetCategories();
   }, []);
 
+  
+
   return (
     <div className="main">
       <Header>
