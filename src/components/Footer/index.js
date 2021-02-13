@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";   
 
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  // position: fixed;
+  position: fixed;
   bottom: 0px;
   width: 100%;
   height: 120px;

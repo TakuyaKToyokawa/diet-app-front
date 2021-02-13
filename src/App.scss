@@ -1,7 +1,5 @@
 //Imports
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600;700&display=swap");
-@import "./pages/diary.scss";
-@import "./pages/index.scss";
 
 //General Usage
 html {
@@ -58,6 +56,25 @@ h6 {
   font-weight: 600;
 }
 
+//Text for Header
+.Namediv{
+  margin-top: 0px;
+  color: white;
+}
+.Currentdaytitle{
+    font-weight: normal;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 150px;
+    color: white;
+}
+ .Text {
+    color: white; 
+ }
+
+
+//Base container for page
 .App {
   display: flex;
   flex-direction: column;
@@ -65,16 +82,15 @@ h6 {
   align-items: center;
   width: 100vw;
   height: 100vh;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  min-width: 400px;
-  align-items: center;
-  background-color: #f2f2f2;
+  .main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    min-width: 400px;
+    align-items: center;
+    background-color: #f2f2f2;
+  }
 }
 
 //Food Search page
@@ -107,4 +123,5 @@ h6 {
   width: 35px;
   cursor:pointer;
 }
+
 

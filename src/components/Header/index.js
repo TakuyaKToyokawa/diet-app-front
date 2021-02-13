@@ -11,30 +11,11 @@ const Main = styled.div`
   margin-left: 20px;
 `;
 
-const Title = styled.p`
-  color: White;
-  font-size: ${(props) => (props.size ? props.size : "24px")};
-  text-align: center;
-  padding-top: 50px;
-`;
-
-const Title2 = styled.p`
-  color: White;
-  text-align: center;
-  padding-top: 50px;
-  font-size: 36px;
-`;
 
 const Header = ({children}) => {
   return <Main>
         {children}
       </Main>
-};
-
-Header.defaultProps = {
-  title: "",
-  size: null,
-  title2: "",
 };
 
 export default Header;

@@ -1,13 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
+
 import Header from "../components/Header";
 import HorizontalProgress from "../components/HorizontalProgress";
 import MacronutrientsInfo from "../components/MacronutrientsInfo";
 import Container from "../components/Container";
 import ProgressReport from "../components/ProgressReport";
-import { meals } from "../database/sampleMeals";
 
 const Homepage = () => {
+  const [meals, setMeals] = useState([]);
+
+  //Get foods from heroku database
+  const GetMeals = async () => {
+    let resp = await axios.get(
+      "https://diet-app-backend.herokuapp.com/api/meals"
+    );
+    setMeals(resp.data.meals);
+    console.log(resp.data.meals);
+  };
+
+  useEffect(() => {
+    GetMeals();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   //add all macronutrients and dispaly them. Probably need to change to useState later
   let totalFat = 0;
   let totalCarbs = 0;
@@ -38,7 +53,7 @@ const Homepage = () => {
         </div>
         <div className="center">
           <h1 className="Currentdaytitle">
-            <img src="arrow.png" /> Today
+            <img src="arrow.png" alt="arrow.png"/> Today
           </h1>
         </div>
       </Header>

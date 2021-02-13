@@ -21,14 +21,12 @@ const Arrow = styled.img`
 
 const Dropdown = ({ category }) => {
   return (
-    <>
-      <Container>
-        <p>
-          <b>{category}</b>
-        </p>
-        <Arrow src="./icons/down_arrow.svg" />
-      </Container>
-    </>
+    <Container>
+      <p>
+        <b>{category}</b>
+      </p>
+      <Arrow src="./icons/down_arrow.svg" />
+    </Container>
   );
 };
 

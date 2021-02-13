@@ -1,5 +1,5 @@
 
-export const foods = [
+export const foodDB = [
   {
     "category": "Dairy",
     "name": "Milk",

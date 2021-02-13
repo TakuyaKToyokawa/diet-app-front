@@ -5,31 +5,38 @@ import Dropdown from "../components/Dropdown";
 import SearchBar from "../components/SearchBar";
 import FoodInfo from "../components/FoodInfo";
 import List from "../components/List";
-import { foods } from "../database/sampleFoods";
-import { meals } from "database/sampleMeals";
 
-const FoodSearchPage = () => {
+
+const FoodSearch = () => {
   const [expanded, setExpanded] = useState("hidden");
-  const {Dropdown, setExpanded} = useState("display");
   const [categories, setCategories] = useState([]);
   const [carbs, setCarbs] = useState();
   const [calories, setCalories] = useState();
   const [protein, setProtein] = useState();
   const [fat, setFat] = useState();
   const [name, setName] = useState();
-  const [foodsarr, setFoodsarr] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   //Displays onclick for FoodInfo Component
   const FoodInfoVisibility = () => {
-    if (expanded == "hidden") {
+    if (expanded === "hidden") {
       setExpanded("visible");
     } else {
       setExpanded("hidden");
     }
   };
 
+  //Get foods from heroku database
+  const GetFoods = async () => {
+    let resp = await axios.get(
+      "https://diet-app-backend.herokuapp.com/api/foods"
+    );
+    setFoods(resp.data.foods);
+    console.log(resp.data.foods);
+  };
+
   //Get Categories for filter purposes during mapping
-  function GetCategories() {
+  const GetCategories = () => {
     let result = [];
     for (let i = 0; i < foods.length; i++) {
       let category = foods[i].category;
@@ -38,34 +45,34 @@ const FoodSearchPage = () => {
       }
     }
     setCategories(result);
-  }
+  };
 
-  // //Filter
-  // const FilterPage = (text) => {
-  //   setName(
-  //     allname.filter((o)=>{
-  //       return o.name.includes(text);
-  //     })
-  //   )
-  // }
-
-
-  // Sort by caloreis
-
-
+  //Sort by calories function
   const SortCals = () => {
-    setFoodsarr(
-      foodsarr.sort(sortByCalories)
-    )
-    console.log(foodsarr)
+    setFoods(foods.sort(sortByCalories));
+    console.log(foods);
+  };
+
+  function sortByCalories(a, b) {
+    if (a.calories > b.calories) {
+      console.log(a.calories, b.calories);
+      return 1;
+    }
+    if (a.calories < b.calories) {
+      console.log(a.calories, b.calories);
+      return -1;
+    } else {
+      console.log(a.calories, b.calories);
+      return 0;
+    }
   }
 
   // Sort by Alphabetical order
-  function sortByName(a,b){
-    if(a.name > b.name){
-      return 1
+  function sortByName(a, b) {
+    if (a.name > b.name) {
+      return 1;
     }
-    if(a.name < b.name){
+    if (a.name < b.name) {
       return -1;
     } else {
       return 0;
@@ -73,31 +80,26 @@ const FoodSearchPage = () => {
   }
 
   const SortName = () => {
-    setFoodsarr(
-      foodsarr.sort(sortByName)
-    )
-  }
+    setFoods(foods.sort(sortByName));
+  };
 
-  const getFoods = async () => {
-    setFoodsarr(foods)
-    console.log(foodsarr)
-  }
-
+  //Searchbar Function for filters
   const updateInput = async (input) => {
-    setFoodsarr(foodsarr.filter((o) => {
-      return o.name.toLowerCase().includes(input.toLowerCase())
-     }))
-     console.log(foodsarr)
-     if (input == ""){
-       setFoodsarr(foods)
-     }
-  }
+    setFoods(
+      foods.filter((o) => {
+        return o.foodName.toLowerCase().includes(input.toLowerCase());
+      })
+    );
+    console.log(foods);
+    if (input === "") {
+      GetFoods();
+    }
+  };
 
   useEffect(() => {
     GetCategories();
-    getFoods();
+    GetFoods();
   }, []);
-
 
   return (
     <div className="main">
@@ -113,14 +115,16 @@ const FoodSearchPage = () => {
         onClose={FoodInfoVisibility}
       ></FoodInfo>
       <Header>
-        <div class="headerCenter">
+        <div className="headerCenter">
           <h2 className="title">Breakfast</h2>
         </div>
       </Header>
       <div className="search">
-        <SearchBar onChange={(e) => {
-          updateInput(e.target.value)
-        }}/>
+        <SearchBar
+          onChange={(e) => {
+            updateInput(e.target.value);
+          }}
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -129,9 +133,9 @@ const FoodSearchPage = () => {
           className="filterIcon"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
           />
         </svg>
@@ -139,20 +143,17 @@ const FoodSearchPage = () => {
       <div className="dropdown">
         <div className="ddmenu">
           <div className="food">
-            {/* mapping for all the categories and lists */}
-            {categories.map((o) => {
+            {categories.map((o, i) => {
               let currentCategory = o;
               return (
                 <>
-
-                  <Dropdown onCLick={ExpandCategory} category={o} />
-                  {foodsarr.map((o) => {
-
+                  <Dropdown key={i} category={o} />
+                  {foods.map((o) => {
                     if (o.category === currentCategory) {
                       return (
                         <List
-                        //hides lists or display list based on useState of expand category
-                          text={o.name}
+                          key={i}
+                          text={o.foodName}
                           number={o.calories}
                           onClick={() => {
                             setExpanded("visible");
@@ -160,15 +161,21 @@ const FoodSearchPage = () => {
                             setProtein(o.protein);
                             setCalories(o.calories);
                             setFat(o.fat);
-                            setName(o.name);
+                            setName(o.foodName);
                           }}
                         />
                       );
+                    } else {
+                      return null;
                     }
                   })}
                 </>
               );
             })}
+            {/* {categories.map((o, i) => {
+              let currentCategory = o;
+              return <Dropdown key={i} category={currentCategory} />;
+            })} */}
           </div>
         </div>
       </div>
@@ -176,19 +183,4 @@ const FoodSearchPage = () => {
   );
 };
 
-export default FoodSearchPage;
-
-  function sortByCalories(a, b) {
-    if (a.calories > b.calories) {
-      console.log(a.calories, b.calories)
-      return 1
-    }
-    if (a.calories < b.calories) {
-      console.log(a.calories, b.calories)
-      return -1;
-    } else {
-      console.log(a.calories, b.calories)
-      return 0;
-    }
-    console.log(a.calories, b.calories)
-  }
+export default FoodSearch;
