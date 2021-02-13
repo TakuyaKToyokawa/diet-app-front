@@ -1,31 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import FoodList from "../components/FoodList";
-import styled from "styled-components";
 import List from "../components/FoodList/list";
 import { meals } from "../database/sampleMeals";
-
-const Namediv = styled.h1`
-  margin-top: 0px;
-  color: white;
-`;
-
-const Headingnumber = styled.h1`
-  font-weight: normal;
-`;
-
-const Currentdaytitle = styled.h1`
-  font-weight: normal;
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 150px;
-  color: white;
-`;
-
-const Text = styled.p`
-  color: white;
-`;
 
 const Diary = ({ user }) => {
   const [categories, setCategories] = useState([]);
@@ -52,13 +29,13 @@ const Diary = ({ user }) => {
     <div className="main">
       <Header>
         <div className="headerWelcome">
-          <Text> Welcome back </Text>
-          <Namediv> {user} </Namediv>
+          <p className="Text"> Welcome back </p>
+          <h1 className="Namediv"> {user} </h1>
         </div>
         <div className="center">
-          <Currentdaytitle>
+          <h1 className="Currentdaytitle">
             <img src="arrow.png" /> Today
-          </Currentdaytitle>
+          </h1>
         </div>
       </Header>
       <h2 className="heading">Breakfast</h2>

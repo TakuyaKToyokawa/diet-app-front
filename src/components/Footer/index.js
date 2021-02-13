@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
+  // position: fixed;
   bottom: 0px;
   width: 100%;
   height: 120px;
@@ -27,6 +27,7 @@ const Text = styled.p`
 
 // Icons use masking system to enable hover effect
 const Icons = styled.div`
+  margin-top: 15px;
   width: 75px;
   height: 32px;
   background-color: #cccccc;

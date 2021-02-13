@@ -1,9 +1,8 @@
 .main{
     display:flex;
-   
-.Namediv{
-  margin-top: 0px;
-  color: white;
+
+.Text{
+    color: white;
 }
 .Currentdaytitle{
     font-weight: normal;
@@ -13,8 +12,12 @@
     width: 150px;
     color: white;
 }
- .Text {
-    color: white; 
- }
+.Namediv{
+    margin-top: 0px;
+    color: white;
+}
+.Headingnumber{
+    font-weight: normal;
+}
 
 }
