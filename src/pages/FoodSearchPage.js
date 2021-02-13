@@ -10,12 +10,14 @@ import { meals } from "database/sampleMeals";
 
 const FoodSearchPage = () => {
   const [expanded, setExpanded] = useState("hidden");
+  const {Dropdown, setExpanded} = useState("display");
   const [categories, setCategories] = useState([]);
   const [carbs, setCarbs] = useState();
   const [calories, setCalories] = useState();
   const [protein, setProtein] = useState();
   const [fat, setFat] = useState();
   const [name, setName] = useState();
+  const [foodsarr, setFoodsarr] = useState([]);
 
   //Displays onclick for FoodInfo Component
   const FoodInfoVisibility = () => {
@@ -38,13 +40,69 @@ const FoodSearchPage = () => {
     setCategories(result);
   }
 
+  // //Filter
+  // const FilterPage = (text) => {
+  //   setName(
+  //     allname.filter((o)=>{
+  //       return o.name.includes(text);
+  //     })
+  //   )
+  // }
+
+
+  // Sort by caloreis
+
+
+  const SortCals = () => {
+    setFoodsarr(
+      foodsarr.sort(sortByCalories)
+    )
+    console.log(foodsarr)
+  }
+
+  // Sort by Alphabetical order
+  function sortByName(a,b){
+    if(a.name > b.name){
+      return 1
+    }
+    if(a.name < b.name){
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
+  const SortName = () => {
+    setFoodsarr(
+      foodsarr.sort(sortByName)
+    )
+  }
+
+  const getFoods = async () => {
+    setFoodsarr(foods)
+    console.log(foodsarr)
+  }
+
+  const updateInput = async (input) => {
+    setFoodsarr(foodsarr.filter((o) => {
+      return o.name.toLowerCase().includes(input.toLowerCase())
+     }))
+     console.log(foodsarr)
+     if (input == ""){
+       setFoodsarr(foods)
+     }
+  }
 
   useEffect(() => {
     GetCategories();
+    getFoods();
   }, []);
+
 
   return (
     <div className="main">
+      <button onClick={SortCals}>Sort by Cals</button>
+      <button onClick={SortName}>Sort by Name</button>
       <FoodInfo
         Name={name}
         CaloriesNumber={calories}
@@ -60,7 +118,9 @@ const FoodSearchPage = () => {
         </div>
       </Header>
       <div className="search">
-        <SearchBar />
+        <SearchBar onChange={(e) => {
+          updateInput(e.target.value)
+        }}/>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -84,11 +144,14 @@ const FoodSearchPage = () => {
               let currentCategory = o;
               return (
                 <>
-                  <Dropdown category={o} />
-                  {foods.map((o) => {
+
+                  <Dropdown onCLick={ExpandCategory} category={o} />
+                  {foodsarr.map((o) => {
+
                     if (o.category === currentCategory) {
                       return (
                         <List
+                        //hides lists or display list based on useState of expand category
                           text={o.name}
                           number={o.calories}
                           onClick={() => {
@@ -114,3 +177,18 @@ const FoodSearchPage = () => {
 };
 
 export default FoodSearchPage;
+
+  function sortByCalories(a, b) {
+    if (a.calories > b.calories) {
+      console.log(a.calories, b.calories)
+      return 1
+    }
+    if (a.calories < b.calories) {
+      console.log(a.calories, b.calories)
+      return -1;
+    } else {
+      console.log(a.calories, b.calories)
+      return 0;
+    }
+    console.log(a.calories, b.calories)
+  }
