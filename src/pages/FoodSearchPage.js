@@ -10,6 +10,7 @@ import { meals } from "database/sampleMeals";
 
 const FoodSearchPage = () => {
   const [expanded, setExpanded] = useState("hidden");
+  const {Dropdown, setExpanded} = useState("display");
   const [categories, setCategories] = useState([]);
   const [carbs, setCarbs] = useState();
   const [calories, setCalories] = useState();
@@ -143,11 +144,14 @@ const FoodSearchPage = () => {
               let currentCategory = o;
               return (
                 <>
-                  <Dropdown category={o} />
+
+                  <Dropdown onCLick={ExpandCategory} category={o} />
                   {foodsarr.map((o) => {
+
                     if (o.category === currentCategory) {
                       return (
                         <List
+                        //hides lists or display list based on useState of expand category
                           text={o.name}
                           number={o.calories}
                           onClick={() => {
