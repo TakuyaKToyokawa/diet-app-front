@@ -5,6 +5,7 @@ const Container = styled.div`
   width: 383px;
   height: 503px;
   display: flex;
+  align-items:center;
   background: linear-gradient(to bottom, #ffffff 51%, #fafafa 50%);
   border-radius: 15px;
   filter: drop-shadow(0 0 0.75rem black);
@@ -12,10 +13,12 @@ const Container = styled.div`
 `;
 
 const Main = styled.div`
+position:relative;
+top: -350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 150vh;
   visibility: ${(props) => (props.visibility ? props.visibility : "hidden")};
@@ -29,7 +32,7 @@ const CloseIcon = styled.img`
   left: 15px;
   width: 15px;
   height: 15px;
-  z-index:2;
+  z-index: 2;
   cursor: pointer;
 `;
 
@@ -141,12 +144,47 @@ const Bar = styled.div`
   flex: 2;
 `;
 
+const ButtonCont = styled.div`
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  & a {
+    text-decoration: none;
+  }
+`;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  background-color: #cd407d;
+  color: white;
+  padding: 0px 20px;
+  min-width: 120px;
+  min-height: 50px;
+  border-radius: 100px;
+  border: none;
+  outline:none;
+  transition: 0.1s ease-out;
+  &:hover {
+    background-color: #a22a5e;
+  }
+`;
+
 const MacronutrientsInfo = ({
   Name,
   CaloriesNumber,
-  protein, fat, carbs,
+  protein,
+  fat,
+  carbs,
   onClose,
   visibility,
+  onClick
 }) => {
   return (
     <Main visibility={visibility}>
@@ -195,7 +233,12 @@ const MacronutrientsInfo = ({
           </BarContainer>
         </BottomContainer>
 
-        {/* <Button /> */}
+        <ButtonCont>
+          <Button onClick={onClick}>
+            {" "}
+            <img src="+.png" alt="plusButton"></img>Add Food
+          </Button>
+        </ButtonCont>
       </Container>
     </Main>
   );
@@ -208,6 +251,7 @@ MacronutrientsInfo.defaultProps = {
   width: null,
   bgcolor: null,
   onClose: () => {},
+  onClick: () => {}
 };
 
 export default MacronutrientsInfo;

@@ -21,6 +21,7 @@ const Img = styled.img`
   margin-right: 10px;
   width: 20px;
   height: 20px;
+  cursor:pointer;
 `;
 
 const List = ({onRemove, listAmount, foodName, foodCalories}) => {

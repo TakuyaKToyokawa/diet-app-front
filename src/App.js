@@ -14,8 +14,14 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/FoodSearch">
-            <FoodSearch></FoodSearch>
+          <Route path="/FoodSearchBreakfast">
+            <FoodSearch type="breakfast"></FoodSearch>
+          </Route>
+          <Route path="/FoodSearchLunch">
+            <FoodSearch type="lunch"></FoodSearch>
+          </Route>
+          <Route path="/FoodSearchDinner">
+            <FoodSearch type="dinner"></FoodSearch>
           </Route>
           <Route path="/Diary">
             <Diary></Diary>

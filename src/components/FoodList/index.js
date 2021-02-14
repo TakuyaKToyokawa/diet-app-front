@@ -33,6 +33,7 @@ const ButtonCont = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 20px;
   & a {
     text-decoration: none;
   }
@@ -59,7 +60,7 @@ const FoodList = ({ total, link, children }) => {
 };
 
 FoodList.defaultProps = {
-  total: "200",
+  total: "0",
   children: <List/>,
   link: "/FoodSearch"
 };

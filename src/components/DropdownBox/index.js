@@ -19,19 +19,17 @@ const Arrow = styled.img`
   width: 15px;
 `;
 
-const Dropdown = ({ category }) => {
+const DropdownBox = ({ text }) => {
   return (
     <Container>
-      <p>
-        <b>{category}</b>
-      </p>
+      <p>{text}</p>
       <Arrow src="./icons/down_arrow.svg" />
     </Container>
   );
 };
 
-Dropdown.defaultProps = {
-  category: "Vegetable",
+DropdownBox.defaultProps = {
+  text: "Vegetable",
 };
 
-export default Dropdown;
+export default DropdownBox;

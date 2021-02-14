@@ -9,7 +9,6 @@ import ProgressReport from "../components/ProgressReport";
 
 const Homepage = () => {
   const [meals, setMeals] = useState([]);
-
   //Get foods from heroku database
   const GetMeals = async () => {
     let resp = await axios.get(
@@ -42,8 +41,14 @@ const Homepage = () => {
     }
   }
 
-  AddMacronutrients(meals);
+  function ProgressBar(calories){
+    return (Math.ceil((calories/1500)*100));
+  }
 
+  AddMacronutrients(meals);
+  useEffect(()=>{
+
+  },[])
   return (
     <div className="main">
       <Header>
@@ -59,7 +64,7 @@ const Homepage = () => {
       </Header>
       <h2 className="heading">Calories Goals</h2>
       <Container>
-        <HorizontalProgress> </HorizontalProgress>
+        <HorizontalProgress width={ProgressBar(totalCalories)+"%"}> </HorizontalProgress>
         <h1 className="Headingnumber"> {totalCalories}/1500 </h1>
       </Container>
       <h2 className="heading">Macronutrients</h2>
