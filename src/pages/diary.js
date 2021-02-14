@@ -116,8 +116,6 @@ const Diary = ({ user }) => {
             return (
               <List
                 key={i}
-                total={}
-              
                 foodName={o.foodName}
                 foodCalories={o.calories}
                 onRemove={async () => {
