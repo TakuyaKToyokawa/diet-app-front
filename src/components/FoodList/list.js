@@ -30,7 +30,7 @@ const List = ({onRemove, listAmount, foodName, foodCalories}) => {
       <ListCont>
         <ContFlex>
           <Img onClick={onRemove} src="minus.png"></Img>
-          <Text>{listAmount} {foodName}</Text>
+          <Text>{foodName}</Text>
         </ContFlex>
         <Text></Text>
         <Text>
@@ -42,7 +42,7 @@ const List = ({onRemove, listAmount, foodName, foodCalories}) => {
 };
 
 List.defaultProps = {
-    listAmount: "1",
+
     foodName: "Skinny Vanilla Latte",
     foodCalories: "120"
 };

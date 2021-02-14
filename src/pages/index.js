@@ -76,7 +76,7 @@ const Homepage = () => {
         {" "}
       </MacronutrientsInfo>
       <h2 className="heading">Progress Report</h2>
-      <ProgressReport> </ProgressReport>
+      <ProgressReport height={ProgressBar(totalCalories)+"%"}> </ProgressReport>
     </div>
   );
 };

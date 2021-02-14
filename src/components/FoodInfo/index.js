@@ -136,7 +136,7 @@ const MacroNum = styled.div`
 `;
 
 const Bar = styled.div`
-  width: ${(props) => (props.width ? props.width : "184px")};
+  width: ${(props) => (props.width ? props.width : "100px")};
   height: 19px;
   ${(props) => props.bgcolor && "background-color:" + props.bgcolor + ";"}
   border-radius:100px;
@@ -184,6 +184,9 @@ const MacronutrientsInfo = ({
   carbs,
   onClose,
   visibility,
+  carbsWidth,
+  proteinWidth,
+  fatWidth,
   onClick,
 }) => {
   return (
@@ -217,19 +220,19 @@ const MacronutrientsInfo = ({
           <BarContainer>
             <MacroInfo>Carbs</MacroInfo>
             <MacroNum>{carbs}</MacroNum>
-            <Bar bgcolor="#39d389" />
+            <Bar width={carbsWidth}bgcolor="#39d389" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Fat</MacroInfo>
             <MacroNum>{fat}</MacroNum>
-            <Bar bgcolor="#ffdf3b" />
+            <Bar width={fatWidth}bgcolor="#ffdf3b" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Protein</MacroInfo>
             <MacroNum>{protein}</MacroNum>
-            <Bar bgcolor="#7910ff" />
+            <Bar width={proteinWidth}bgcolor="#7910ff" />
           </BarContainer>
         </BottomContainer>
 

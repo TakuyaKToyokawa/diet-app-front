@@ -4,10 +4,14 @@ import Header from "../components/Header";
 import DropdownBox from "../components/DropdownBox";
 import SearchBar from "../components/SearchBar";
 import FoodInfo from "../components/FoodInfo";
+import FilterInfo from "../components/FilterInfo";
+import Confirmation from "../components/Confirmation";
 import List from "../components/List";
 
 const FoodSearch = ({ type }) => {
+  const [expandedFilter, setExpandedFilter] = useState("hidden");
   const [expanded, setExpanded] = useState("hidden");
+  const [confirmation, setConfirmation] = useState("hidden");
   const [carbs, setCarbs] = useState();
   const [calories, setCalories] = useState();
   const [protein, setProtein] = useState();
@@ -18,6 +22,7 @@ const FoodSearch = ({ type }) => {
   const [meal, setMeal] = useState();
   const [foods, setFoods] = useState([]);
   let categoryArray = [];
+  let mealType = type.charAt(0).toUpperCase() + type.slice(1);
 
   //Displays onclick for FoodInfo Component
   const FoodInfoVisibility = () => {
@@ -25,6 +30,15 @@ const FoodSearch = ({ type }) => {
       setExpanded("visible");
     } else {
       setExpanded("hidden");
+      setConfirmation("hidden");
+    }
+  };
+
+  const FilterInfoVisibility = () => {
+    if (expandedFilter === "hidden") {
+      setExpandedFilter("visible");
+    } else {
+      setExpandedFilter("hidden");
     }
   };
 
@@ -58,6 +72,7 @@ const FoodSearch = ({ type }) => {
           console.log(error);
         }
       );
+    setConfirmation("visible");
   };
 
   //Sort by calories function
@@ -66,34 +81,9 @@ const FoodSearch = ({ type }) => {
     console.log(foods);
   };
 
-  function sortByCalories(a, b) {
-    if (a.calories > b.calories) {
-      console.log(a.calories, b.calories);
-      return 1;
-    }
-    if (a.calories < b.calories) {
-      console.log(a.calories, b.calories);
-      return -1;
-    } else {
-      console.log(a.calories, b.calories);
-      return 0;
-    }
-  }
-
-  // Sort by Alphabetical order
-  function sortByName(a, b) {
-    if (a.name > b.name) {
-      return 1;
-    }
-    if (a.name < b.name) {
-      return -1;
-    } else {
-      return 0;
-    }
-  }
-
   const SortName = () => {
     setFoods(foods.sort(sortByName));
+    console.log(foods);
   };
 
   //Searchbar Function for filters
@@ -111,12 +101,11 @@ const FoodSearch = ({ type }) => {
 
   useEffect(() => {
     GetFoods();
+    console.log(mealType);
   }, []);
 
   return (
     <div className="main">
-      <button onClick={SortCals}>Sort by Cals</button>
-      <button onClick={SortName}>Sort by Name</button>
       <FoodInfo
         Name={name}
         CaloriesNumber={calories}
@@ -124,14 +113,24 @@ const FoodSearch = ({ type }) => {
         carbs={carbs}
         fat={fat}
         visibility={expanded}
-        onClose={FoodInfoVisibility}
+        onClose={() => {
+          FoodInfoVisibility();
+        }}
         onClick={() => {
           AddtoMeals();
         }}
       ></FoodInfo>
+      <FilterInfo
+        SortCals={SortCals}
+        SortName={SortName}
+        visibility={expandedFilter}
+        onClose={() => {
+          FilterInfoVisibility();
+        }}
+      ></FilterInfo>
       <Header>
         <div className="headerCenter">
-          <h2 className="title">Breakfast</h2>
+          <h2 className="title">{mealType}</h2>
         </div>
       </Header>
       <div className="search">
@@ -141,6 +140,9 @@ const FoodSearch = ({ type }) => {
           }}
         />
         <svg
+          onClick={() => {
+            FilterInfoVisibility();
+          }}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -209,8 +211,37 @@ const FoodSearch = ({ type }) => {
           </div>
         </div>
       </div>
+      <div className="confirmation">
+        <Confirmation visibility={confirmation}></Confirmation>
+      </div>
     </div>
   );
 };
 
 export default FoodSearch;
+
+//Sort Functions
+function sortByCalories(a, b) {
+  if (a.calories > b.calories) {
+    console.log(a.calories, b.calories);
+    return 1;
+  }
+  if (a.calories < b.calories) {
+    console.log(a.calories, b.calories);
+    return -1;
+  } else {
+    console.log(a.calories, b.calories);
+    return 0;
+  }
+}
+
+function sortByName(a, b) {
+  if (a.foodName > b.foodName) {
+    return 1;
+  }
+  if (a.foodName < b.foodName) {
+    return -1;
+  } else {
+    return 0;
+  }
+}

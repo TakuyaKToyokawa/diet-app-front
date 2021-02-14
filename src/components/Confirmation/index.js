@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Buttondiv = styled.h3`
+visibility: ${(props) => (props.visibility ? props.visibility : "hidden")};
 background: #39D389;
 border-radius: 10px;
 width:237px;
@@ -25,9 +26,9 @@ align-items:center;
 margin-right:10px;
 `;
 
-const Confirmation = ({}) => {
+const Confirmation = ({visibility}) => {
   return <>
-  <Buttondiv> 
+  <Buttondiv visibility={visibility}> 
     <Wrapped>
       <Plusicon> <img src="plusicon.png"/> </Plusicon> Food Added!
       </Wrapped>
