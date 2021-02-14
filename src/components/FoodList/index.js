@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";   
 
 //Imported Container Component to keep consistency between pages
 import Container from "components/Container";
@@ -33,6 +33,7 @@ const ButtonCont = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 20px;
   & a {
     text-decoration: none;
   }
@@ -46,7 +47,7 @@ const FoodList = ({ total, link, children }) => {
         <ButtonCont>
           <Link to={link}>
             <Button>
-              <img src="+.png"></img>Add Food
+              <img src="+.png" alt="plusButton"></img>Add Food
             </Button>
           </Link>
           <p>
@@ -59,9 +60,9 @@ const FoodList = ({ total, link, children }) => {
 };
 
 FoodList.defaultProps = {
-  total: "200",
+  total: "0",
   children: <List/>,
-  link: "/FoodSearchPage"
+  link: "/FoodSearch"
 };
 
 export default FoodList;

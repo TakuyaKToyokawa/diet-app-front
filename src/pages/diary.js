@@ -1,29 +1,43 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import Header from "../components/Header";
 import FoodList from "../components/FoodList";
 import List from "../components/FoodList/list";
-import { meals } from "../database/sampleMeals";
 
 const Diary = ({ user }) => {
-  const [categories, setCategories] = useState([]);
+  const [meals, setMeals] = useState([]);
+  const [mealsLength, setMealsLength] = useState();
+  const [breakfastTotal, setBreakfastTotal] = useState();
+  const [lunchTotal, setLunchTotal] = useState();
+  const [dinnerTotal, setDinnerTotal] = useState();
 
-  //Get Categories for filter purposes on diffrentiating meal types during mapping
-  function GetCategories() {
-    let result = [];
-    for (let i = 0; i < meals.length; i++) {
-      let category = meals[i].category;
-      if (!result.includes(category)) {
-        result.push(category);
+  //Get foods from heroku database
+  const GetMeals = async () => {
+    let resp = await axios.get(
+      "https://diet-app-backend.herokuapp.com/api/meals"
+    );
+    setMeals(resp.data.meals);
+    setMealsLength(meals.length);
+  };
+
+  function AddMacronutrients(mealType) {
+    let totalCalories = 0;
+    for (const meal of meals) {
+      if (meal.meal === mealType) {
+        let calories = meal.calories;
+        totalCalories += calories;
+      } else {
+        return null;
       }
     }
-    setCategories(result);
+    return totalCalories;
   }
 
   useEffect(() => {
-    GetCategories();
-  }, []);
-
-  
+    GetMeals();
+    AddMacronutrients(meals);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="main">
@@ -34,36 +48,93 @@ const Diary = ({ user }) => {
         </div>
         <div className="center">
           <h1 className="Currentdaytitle">
-            <img src="arrow.png" /> Today
+            <img src="arrow.png" alt="arrowIcon" /> Today
           </h1>
         </div>
       </Header>
       <h2 className="heading">Breakfast</h2>
-      <FoodList>
-        {meals.map((o) => {
+      <FoodList
+        link="/FoodSearchBreakfast"
+        total={AddMacronutrients("breakfast")}
+      >
+         {meals.map((o, i) => {
           if (o.meal === "breakfast") {
-            return <List foodName={o.name} foodCalories={o.cal} />;
+            return (
+              <List
+                key={i}
+                foodName={o.foodName}
+                foodCalories={o.calories}
+                onRemove={async () => {
+                  await axios.delete(
+                    "https://diet-app-backend.herokuapp.com/api/meals/" + o.id,
+                    {
+                      data: {
+                        id: i,
+                      },
+                    }
+                  );
+                  GetMeals();
+                }}
+              />
+            );
+          } else {
+            return null;
           }
         })}
-        ;
       </FoodList>
       <h2 className="heading">Lunch</h2>
-      <FoodList>
-        {meals.map((o) => {
+      <FoodList link="/FoodSearchLunch" total={AddMacronutrients("lunch")}>
+      {meals.map((o, i) => {
           if (o.meal === "lunch") {
-            return <List foodName={o.name} foodCalories={o.cal} />;
+            return (
+              <List
+                key={i}
+                foodName={o.foodName}
+                foodCalories={o.calories}
+                onRemove={async () => {
+                  await axios.delete(
+                    "https://diet-app-backend.herokuapp.com/api/meals/" + o.id,
+                    {
+                      data: {
+                        id: i,
+                      },
+                    }
+                  );
+                  GetMeals();
+                }}
+              />
+            );
+          } else {
+            return null;
           }
         })}
-        ;
       </FoodList>
       <h2 className="heading">Dinner</h2>
-      <FoodList>
-        {meals.map((o) => {
+      <FoodList link="/FoodSearchDinner" total={AddMacronutrients("dinner")}>
+      {meals.map((o, i) => {
           if (o.meal === "dinner") {
-            return <List foodName={o.name} foodCalories={o.cal} />;
+            return (
+              <List
+                key={i}
+                foodName={o.foodName}
+                foodCalories={o.calories}
+                onRemove={async () => {
+                  await axios.delete(
+                    "https://diet-app-backend.herokuapp.com/api/meals/" + o.id,
+                    {
+                      data: {
+                        id: i,
+                      },
+                    }
+                  );
+                  GetMeals();
+                }}
+              />
+            );
+          } else {
+            return null;
           }
         })}
-        ;
       </FoodList>
     </div>
   );

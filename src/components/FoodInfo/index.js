@@ -5,6 +5,7 @@ const Container = styled.div`
   width: 383px;
   height: 503px;
   display: flex;
+  align-items: center;
   background: linear-gradient(to bottom, #ffffff 51%, #fafafa 50%);
   border-radius: 15px;
   filter: drop-shadow(0 0 0.75rem black);
@@ -12,10 +13,12 @@ const Container = styled.div`
 `;
 
 const Main = styled.div`
+  position: relative;
+  top: -350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 150vh;
   visibility: ${(props) => (props.visibility ? props.visibility : "hidden")};
@@ -29,7 +32,7 @@ const CloseIcon = styled.img`
   left: 15px;
   width: 15px;
   height: 15px;
-  z-index:2;
+  z-index: 2;
   cursor: pointer;
 `;
 
@@ -133,7 +136,7 @@ const MacroNum = styled.div`
 `;
 
 const Bar = styled.div`
-  width: ${(props) => (props.width ? props.width : "184px")};
+  width: ${(props) => (props.width ? props.width : "100px")};
   height: 19px;
   ${(props) => props.bgcolor && "background-color:" + props.bgcolor + ";"}
   border-radius:100px;
@@ -141,12 +144,50 @@ const Bar = styled.div`
   flex: 2;
 `;
 
+const ButtonCont = styled.div`
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  & a {
+    text-decoration: none;
+  }
+`;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  background-color: #cd407d;
+  color: white;
+  padding: 0px 20px;
+  min-width: 120px;
+  min-height: 50px;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  transition: 0.1s ease-out;
+  &:hover {
+    background-color: #a22a5e;
+  }
+`;
+
 const MacronutrientsInfo = ({
   Name,
   CaloriesNumber,
-  protein, fat, carbs,
+  protein,
+  fat,
+  carbs,
   onClose,
   visibility,
+  carbsWidth,
+  proteinWidth,
+  fatWidth,
+  onClick,
 }) => {
   return (
     <Main visibility={visibility}>
@@ -179,23 +220,28 @@ const MacronutrientsInfo = ({
           <BarContainer>
             <MacroInfo>Carbs</MacroInfo>
             <MacroNum>{carbs}</MacroNum>
-            <Bar width="184px" bgcolor="#39d389" />
+            <Bar width={carbsWidth}bgcolor="#39d389" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Fat</MacroInfo>
             <MacroNum>{fat}</MacroNum>
-            <Bar width="82px" bgcolor="#ffdf3b" />
+            <Bar width={fatWidth}bgcolor="#ffdf3b" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Protein</MacroInfo>
             <MacroNum>{protein}</MacroNum>
-            <Bar width="48px" bgcolor="#7910ff" />
+            <Bar width={proteinWidth}bgcolor="#7910ff" />
           </BarContainer>
         </BottomContainer>
 
-        {/* <Button /> */}
+        <ButtonCont>
+          <Button onClick={onClick}>
+            {" "}
+            <img src="+.png" alt="plusButton"></img>Add Food
+          </Button>
+        </ButtonCont>
       </Container>
     </Main>
   );
@@ -208,6 +254,7 @@ MacronutrientsInfo.defaultProps = {
   width: null,
   bgcolor: null,
   onClose: () => {},
+  onClick: () => {},
 };
 
 export default MacronutrientsInfo;

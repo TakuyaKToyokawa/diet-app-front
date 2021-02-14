@@ -26,7 +26,7 @@ const ProgressReport = ({ height }) => {
         <Date> Jan 19</Date>
       </Progressbarsdiv>
       <Progressbarsdiv>
-        <VerticalProgress />
+        <VerticalProgress height={height}/>
         <Date>
           <b>Today</b>
         </Date>

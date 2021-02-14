@@ -1,28 +1,29 @@
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Homepage from "./pages/index";
-import Footer from "./components/Footer";
-import Diary from "./pages/diary";
-import FoodSearchPage from "./pages/FoodSearchPage";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-  // test; create; food
-  // useEffect(()=>{
-  //   (async ()=>{
-  //       const foods = await getFoodList("");
-  //       console.log(foods[0]);
-  //     })()
-  // }, [])
+//Pages
+import Homepage from "./pages/index";
+import Diary from "./pages/Diary.js";
+import FoodSearch from "./pages/FoodSearch";
+
+//Components
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-
-          <Route path="/FoodSearchPage">
-            <FoodSearchPage></FoodSearchPage>
+          <Route path="/FoodSearchBreakfast">
+            <FoodSearch type="breakfast"></FoodSearch>
           </Route>
-          <Route path="/diary">
+          <Route path="/FoodSearchLunch">
+            <FoodSearch type="lunch"></FoodSearch>
+          </Route>
+          <Route path="/FoodSearchDinner">
+            <FoodSearch type="dinner"></FoodSearch>
+          </Route>
+          <Route path="/Diary">
             <Diary></Diary>
           </Route>
           <Route path="/">
