@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Callback } from "react";
 import axios from "axios";
 import Header from "../components/Header";
-import Dropdown from "../components/Dropdown";
+import DropdownBox from "../components/DropdownBox";
 import SearchBar from "../components/SearchBar";
 import FoodInfo from "../components/FoodInfo";
 import List from "../components/List";
 
-
-const FoodSearch = () => {
+const FoodSearch = ({ type }) => {
   const [expanded, setExpanded] = useState("hidden");
-  const [categories, setCategories] = useState([]);
   const [carbs, setCarbs] = useState();
   const [calories, setCalories] = useState();
   const [protein, setProtein] = useState();
+  const [category, setCategory] = useState();
+  const [id, setId] = useState();
   const [fat, setFat] = useState();
   const [name, setName] = useState();
+  const [meal, setMeal] = useState();
   const [foods, setFoods] = useState([]);
+  let categoryArray = [];
 
   //Displays onclick for FoodInfo Component
   const FoodInfoVisibility = () => {
@@ -29,22 +31,33 @@ const FoodSearch = () => {
   //Get foods from heroku database
   const GetFoods = async () => {
     let resp = await axios.get(
-      "https://diet-app-backend.herokuapp.com/api/foods"
+      "https://diet-app-backend.herokuapp.com/api/foods/"
     );
     setFoods(resp.data.foods);
     console.log(resp.data.foods);
   };
 
-  //Get Categories for filter purposes during mapping
-  const GetCategories = () => {
-    let result = [];
-    for (let i = 0; i < foods.length; i++) {
-      let category = foods[i].category;
-      if (!result.includes(category)) {
-        result.push(category);
-      }
-    }
-    setCategories(result);
+  //Post selected food
+  const AddtoMeals = async () => {
+    console.log(meal.type, carbs, protein, calories, fat, name, category, id);
+    var resp = await axios
+      .post("https://diet-app-backend.herokuapp.com/api/meals/", {
+        category: category,
+        meal: meal.type,
+        foodName: name,
+        calories: calories,
+        protein: protein,
+        carbs: carbs,
+        fat: fat,
+      })
+      .then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
   //Sort by calories function
@@ -97,8 +110,8 @@ const FoodSearch = () => {
   };
 
   useEffect(() => {
-    GetCategories();
     GetFoods();
+    console.log({ type });
   }, []);
 
   return (
@@ -113,6 +126,9 @@ const FoodSearch = () => {
         fat={fat}
         visibility={expanded}
         onClose={FoodInfoVisibility}
+        onClick={() => {
+          AddtoMeals();
+        }}
       ></FoodInfo>
       <Header>
         <div className="headerCenter">
@@ -143,13 +159,21 @@ const FoodSearch = () => {
       <div className="dropdown">
         <div className="ddmenu">
           <div className="food">
-            {categories.map((o, i) => {
-              let currentCategory = o;
+            {foods.map((o, i) => {
+              let currentCategory = o.category;
+              if (!categoryArray.includes(currentCategory)) {
+                categoryArray.push(currentCategory);
+                console.log(categoryArray);
+              }
               return (
                 <>
-                  <Dropdown key={i} category={o} />
+                  <DropdownBox key={i} text={o.category} />
                   {foods.map((o) => {
-                    if (o.category === currentCategory) {
+                    console.log(categoryArray.includes(currentCategory));
+                    if (
+                      o.category === currentCategory &&
+                      categoryArray.includes(currentCategory)
+                    ) {
                       return (
                         <List
                           key={i}
@@ -162,6 +186,19 @@ const FoodSearch = () => {
                             setCalories(o.calories);
                             setFat(o.fat);
                             setName(o.foodName);
+                            setCategory(o.category);
+                            setMeal({ type });
+                            setId(o.id);
+                            console.log(
+                              { type },
+                              carbs,
+                              protein,
+                              calories,
+                              fat,
+                              name,
+                              category,
+                              id
+                            );
                           }}
                         />
                       );
@@ -172,9 +209,26 @@ const FoodSearch = () => {
                 </>
               );
             })}
-            {/* {categories.map((o, i) => {
+            {/* {foods.map((o, i) => {
+              return (
+                <List
+                  key={i}
+                  text={o.foodName}
+                  number={o.calories}
+                  onClick={() => {
+                    setExpanded("visible");
+                    setCarbs(o.carbs);
+                    setProtein(o.protein);
+                    setCalories(o.calories);
+                    setFat(o.fat);
+                    setName(o.foodName);
+                  }}
+                />
+              );
+            })}
+            {foods.map((o, i) => {
               let currentCategory = o;
-              return <Dropdown key={i} category={currentCategory} />;
+              return <DropdownBox key={i} category={currentCategory} />;
             })} */}
           </div>
         </div>
