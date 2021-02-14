@@ -5,7 +5,7 @@ const Container = styled.div`
   width: 383px;
   height: 503px;
   display: flex;
-  align-items:center;
+  align-items: center;
   background: linear-gradient(to bottom, #ffffff 51%, #fafafa 50%);
   border-radius: 15px;
   filter: drop-shadow(0 0 0.75rem black);
@@ -13,8 +13,8 @@ const Container = styled.div`
 `;
 
 const Main = styled.div`
-position:relative;
-top: -350px;
+  position: relative;
+  top: -350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,7 +169,7 @@ const Button = styled.button`
   min-height: 50px;
   border-radius: 100px;
   border: none;
-  outline:none;
+  outline: none;
   transition: 0.1s ease-out;
   &:hover {
     background-color: #a22a5e;
@@ -184,7 +184,7 @@ const MacronutrientsInfo = ({
   carbs,
   onClose,
   visibility,
-  onClick
+  onClick,
 }) => {
   return (
     <Main visibility={visibility}>
@@ -217,19 +217,19 @@ const MacronutrientsInfo = ({
           <BarContainer>
             <MacroInfo>Carbs</MacroInfo>
             <MacroNum>{carbs}</MacroNum>
-            <Bar width="184px" bgcolor="#39d389" />
+            <Bar bgcolor="#39d389" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Fat</MacroInfo>
             <MacroNum>{fat}</MacroNum>
-            <Bar width="82px" bgcolor="#ffdf3b" />
+            <Bar bgcolor="#ffdf3b" />
           </BarContainer>
 
           <BarContainer>
             <MacroInfo>Protein</MacroInfo>
             <MacroNum>{protein}</MacroNum>
-            <Bar width="48px" bgcolor="#7910ff" />
+            <Bar bgcolor="#7910ff" />
           </BarContainer>
         </BottomContainer>
 
@@ -251,7 +251,7 @@ MacronutrientsInfo.defaultProps = {
   width: null,
   bgcolor: null,
   onClose: () => {},
-  onClick: () => {}
+  onClick: () => {},
 };
 
 export default MacronutrientsInfo;

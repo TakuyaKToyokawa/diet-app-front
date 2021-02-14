@@ -111,7 +111,6 @@ const FoodSearch = ({ type }) => {
 
   useEffect(() => {
     GetFoods();
-    console.log({ type });
   }, []);
 
   return (
@@ -161,75 +160,52 @@ const FoodSearch = ({ type }) => {
           <div className="food">
             {foods.map((o, i) => {
               let currentCategory = o.category;
-              if (!categoryArray.includes(currentCategory)) {
-                categoryArray.push(currentCategory);
-                console.log(categoryArray);
+              if (
+                o.category === currentCategory &&
+                !categoryArray.includes(currentCategory)
+              ) {
+                return (
+                  <>
+                    <DropdownBox key={i} text={o.category} />
+                    {foods.map((o, i) => {
+                      if (!categoryArray.includes(currentCategory)) {
+                        categoryArray.push(currentCategory);
+                      }
+                      if (o.category === currentCategory) {
+                        return (
+                          <List
+                            key={i}
+                            text={o.foodName}
+                            number={o.calories}
+                            onClick={() => {
+                              setExpanded("visible");
+                              setCarbs(o.carbs);
+                              setProtein(o.protein);
+                              setCalories(o.calories);
+                              setFat(o.fat);
+                              setName(o.foodName);
+                              setCategory(o.category);
+                              setMeal({ type });
+                              setId(o.id);
+                              console.log(
+                                { type },
+                                carbs,
+                                protein,
+                                calories,
+                                fat,
+                                name,
+                                category,
+                                id
+                              );
+                            }}
+                          />
+                        );
+                      }
+                    })}
+                  </>
+                );
               }
-              return (
-                <>
-                  <DropdownBox key={i} text={o.category} />
-                  {foods.map((o) => {
-                    console.log(categoryArray.includes(currentCategory));
-                    if (
-                      o.category === currentCategory &&
-                      categoryArray.includes(currentCategory)
-                    ) {
-                      return (
-                        <List
-                          key={i}
-                          text={o.foodName}
-                          number={o.calories}
-                          onClick={() => {
-                            setExpanded("visible");
-                            setCarbs(o.carbs);
-                            setProtein(o.protein);
-                            setCalories(o.calories);
-                            setFat(o.fat);
-                            setName(o.foodName);
-                            setCategory(o.category);
-                            setMeal({ type });
-                            setId(o.id);
-                            console.log(
-                              { type },
-                              carbs,
-                              protein,
-                              calories,
-                              fat,
-                              name,
-                              category,
-                              id
-                            );
-                          }}
-                        />
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </>
-              );
             })}
-            {/* {foods.map((o, i) => {
-              return (
-                <List
-                  key={i}
-                  text={o.foodName}
-                  number={o.calories}
-                  onClick={() => {
-                    setExpanded("visible");
-                    setCarbs(o.carbs);
-                    setProtein(o.protein);
-                    setCalories(o.calories);
-                    setFat(o.fat);
-                    setName(o.foodName);
-                  }}
-                />
-              );
-            })}
-            {foods.map((o, i) => {
-              let currentCategory = o;
-              return <DropdownBox key={i} category={currentCategory} />;
-            })} */}
           </div>
         </div>
       </div>
