@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 //Pages
 import Homepage from "./pages/index";
-import Diary from "./pages/Diary.js";
+import Diary from "./pages/Diary";
 import FoodSearch from "./pages/FoodSearch";
 
 //Components
